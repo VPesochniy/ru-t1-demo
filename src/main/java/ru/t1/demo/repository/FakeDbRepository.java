@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import net.datafaker.Faker;
 import ru.t1.demo.aspect.CatchDbExecution;
@@ -14,16 +14,19 @@ import ru.t1.demo.aspect.LogDbException;
 import ru.t1.demo.aspect.LogDbExecution;
 import ru.t1.demo.domain.User;
 
-@Component
+@Repository
 public class FakeDbRepository {
 
     private final List<User> users;
     private final Random random;
     private final Faker faker;
-    private Integer counter;
+    private static Integer counter;
+
+    static {
+        counter = 0;
+    }
 
     public FakeDbRepository() {
-        counter = 0;
         random = new Random();
         users = new ArrayList<>();
         faker = new Faker();
