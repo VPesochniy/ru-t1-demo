@@ -44,7 +44,7 @@ public class DbAspect {
         try {
             proceedingJoinPoint.proceed();
         } catch (Throwable t) {
-            log.warn("Resolved. Method: " + proceedingJoinPoint.getSignature() + " has thrown: "
+            log.warn("Suppressed. Method: " + proceedingJoinPoint.getSignature() + " has thrown: "
                     + t.getClass().getName() + "(" + t.getMessage() + ")" + " with parameters: "
                     + Arrays.toString(proceedingJoinPoint.getArgs()));
 
@@ -59,7 +59,7 @@ public class DbAspect {
 
         // Проверка типа, вдруг кто-то повесит аннотацию не в том классе
         if (target instanceof FakeDbRepository) {
-            log.info("Success DB executions: " + ++dbExecutions);
+            log.info("Successful DB executions: " + ++dbExecutions);
 
         }
 
